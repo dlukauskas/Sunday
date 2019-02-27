@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Municipality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MunicipalityId" Type="int" Nullable="false" />
+          <Property Name="TaxPeriodId" Type="int" Nullable="false" />
+          <Property Name="StartDateUtc" Type="datetime" Nullable="false" />
+          <Property Name="EndDateUtc" Type="datetime" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="CreatedAtUtc" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAtUtc" Type="datetime" Nullable="false" />
+          <Property Name="DeletedAtUtc" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TaxPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Tax_Municipality">
+          <End Role="Municipality" Type="Self.Municipality" Multiplicity="1" />
+          <End Role="Tax" Type="Self.Tax" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipality">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax">
+              <PropertyRef Name="MunicipalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tax_TaxPeriod">
+          <End Role="TaxPeriod" Type="Self.TaxPeriod" Multiplicity="1" />
+          <End Role="Tax" Type="Self.Tax" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax">
+              <PropertyRef Name="TaxPeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntitiesStoreContainer">
+          <EntitySet Name="Municipality" EntityType="Self.Municipality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaxPeriod" EntityType="Self.TaxPeriod" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tax_Municipality" Association="Self.FK_Tax_Municipality">
+            <End Role="Municipality" EntitySet="Municipality" />
+            <End Role="Tax" EntitySet="Tax" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tax_TaxPeriod" Association="Self.FK_Tax_TaxPeriod">
+            <End Role="TaxPeriod" EntitySet="TaxPeriod" />
+            <End Role="Tax" EntitySet="Tax" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Municipality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Taxes" Relationship="Entities.FK_Tax_Municipality" FromRole="Municipality" ToRole="Tax" />
+        </EntityType>
+        <EntityType Name="TaxPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Taxes" Relationship="Entities.FK_Tax_TaxPeriod" FromRole="TaxPeriod" ToRole="Tax" />
+        </EntityType>
+        <EntityContainer Name="EntitiesModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Municipalities" EntityType="Self.Municipality" />
+          <EntitySet Name="TaxPeriods" EntityType="Self.TaxPeriod" />
+          <EntitySet Name="Taxes" EntityType="Entities.Tax" />
+          <AssociationSet Name="FK_Tax_Municipality" Association="Entities.FK_Tax_Municipality">
+            <End Role="Municipality" EntitySet="Municipalities" />
+            <End Role="Tax" EntitySet="Taxes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tax_TaxPeriod" Association="Entities.FK_Tax_TaxPeriod">
+            <End Role="TaxPeriod" EntitySet="TaxPeriods" />
+            <End Role="Tax" EntitySet="Taxes" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MunicipalityId" Type="Int32" Nullable="false" />
+          <Property Name="TaxPeriodId" Type="Int32" Nullable="false" />
+          <Property Name="StartDateUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="2" Scale="1" />
+          <Property Name="CreatedAtUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAtUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletedAtUtc" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Municipality" Relationship="Entities.FK_Tax_Municipality" FromRole="Tax" ToRole="Municipality" />
+          <NavigationProperty Name="TaxPeriod" Relationship="Entities.FK_Tax_TaxPeriod" FromRole="Tax" ToRole="TaxPeriod" />
+        </EntityType>
+        <Association Name="FK_Tax_Municipality">
+          <End Type="Entities.Municipality" Role="Municipality" Multiplicity="1" />
+          <End Type="Entities.Tax" Role="Tax" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipality">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax">
+              <PropertyRef Name="MunicipalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tax_TaxPeriod">
+          <End Type="Entities.TaxPeriod" Role="TaxPeriod" Multiplicity="1" />
+          <End Type="Entities.Tax" Role="Tax" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tax">
+              <PropertyRef Name="TaxPeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="EntitiesModel">
+          <EntitySetMapping Name="Municipalities">
+            <EntityTypeMapping TypeName="Entities.Municipality">
+              <MappingFragment StoreEntitySet="Municipality">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaxPeriods">
+            <EntityTypeMapping TypeName="Entities.TaxPeriod">
+              <MappingFragment StoreEntitySet="TaxPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taxes">
+            <EntityTypeMapping TypeName="Entities.Tax">
+              <MappingFragment StoreEntitySet="Tax">
+                <ScalarProperty Name="DeletedAtUtc" ColumnName="DeletedAtUtc" />
+                <ScalarProperty Name="UpdatedAtUtc" ColumnName="UpdatedAtUtc" />
+                <ScalarProperty Name="CreatedAtUtc" ColumnName="CreatedAtUtc" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="EndDateUtc" ColumnName="EndDateUtc" />
+                <ScalarProperty Name="StartDateUtc" ColumnName="StartDateUtc" />
+                <ScalarProperty Name="TaxPeriodId" ColumnName="TaxPeriodId" />
+                <ScalarProperty Name="MunicipalityId" ColumnName="MunicipalityId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

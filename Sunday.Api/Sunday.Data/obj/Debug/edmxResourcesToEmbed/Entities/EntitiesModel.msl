@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="EntitiesModel">
+    <EntitySetMapping Name="Municipalities">
+      <EntityTypeMapping TypeName="Entities.Municipality">
+        <MappingFragment StoreEntitySet="Municipality">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxPeriods">
+      <EntityTypeMapping TypeName="Entities.TaxPeriod">
+        <MappingFragment StoreEntitySet="TaxPeriod">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taxes">
+      <EntityTypeMapping TypeName="Entities.Tax">
+        <MappingFragment StoreEntitySet="Tax">
+          <ScalarProperty Name="DeletedAtUtc" ColumnName="DeletedAtUtc" />
+          <ScalarProperty Name="UpdatedAtUtc" ColumnName="UpdatedAtUtc" />
+          <ScalarProperty Name="CreatedAtUtc" ColumnName="CreatedAtUtc" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="EndDateUtc" ColumnName="EndDateUtc" />
+          <ScalarProperty Name="StartDateUtc" ColumnName="StartDateUtc" />
+          <ScalarProperty Name="TaxPeriodId" ColumnName="TaxPeriodId" />
+          <ScalarProperty Name="MunicipalityId" ColumnName="MunicipalityId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

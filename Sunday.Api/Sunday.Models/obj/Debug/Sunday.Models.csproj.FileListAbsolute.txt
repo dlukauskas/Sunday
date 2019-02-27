@@ -1,0 +1,6 @@
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Models\bin\Debug\Sunday.Models.dll
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Models\bin\Debug\Sunday.Models.pdb
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Models\obj\Debug\Sunday.Models.csproj.CoreCompileInputs.cache
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Models\obj\Debug\Sunday.Models.dll
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Models\obj\Debug\Sunday.Models.pdb
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Models\obj\Debug\Sunday.Models.csprojAssemblyReference.cache

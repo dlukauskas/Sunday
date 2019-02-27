@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Municipality">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Taxes" Relationship="Entities.FK_Tax_Municipality" FromRole="Municipality" ToRole="Tax" />
+  </EntityType>
+  <EntityType Name="TaxPeriod">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Taxes" Relationship="Entities.FK_Tax_TaxPeriod" FromRole="TaxPeriod" ToRole="Tax" />
+  </EntityType>
+  <EntityContainer Name="EntitiesModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Municipalities" EntityType="Self.Municipality" />
+    <EntitySet Name="TaxPeriods" EntityType="Self.TaxPeriod" />
+    <EntitySet Name="Taxes" EntityType="Entities.Tax" />
+    <AssociationSet Name="FK_Tax_Municipality" Association="Entities.FK_Tax_Municipality">
+      <End Role="Municipality" EntitySet="Municipalities" />
+      <End Role="Tax" EntitySet="Taxes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tax_TaxPeriod" Association="Entities.FK_Tax_TaxPeriod">
+      <End Role="TaxPeriod" EntitySet="TaxPeriods" />
+      <End Role="Tax" EntitySet="Taxes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MunicipalityId" Type="Int32" Nullable="false" />
+    <Property Name="TaxPeriodId" Type="Int32" Nullable="false" />
+    <Property Name="StartDateUtc" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDateUtc" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="2" Scale="1" />
+    <Property Name="CreatedAtUtc" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedAtUtc" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeletedAtUtc" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Municipality" Relationship="Entities.FK_Tax_Municipality" FromRole="Tax" ToRole="Municipality" />
+    <NavigationProperty Name="TaxPeriod" Relationship="Entities.FK_Tax_TaxPeriod" FromRole="Tax" ToRole="TaxPeriod" />
+  </EntityType>
+  <Association Name="FK_Tax_Municipality">
+    <End Type="Entities.Municipality" Role="Municipality" Multiplicity="1" />
+    <End Type="Entities.Tax" Role="Tax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Municipality">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tax">
+        <PropertyRef Name="MunicipalityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tax_TaxPeriod">
+    <End Type="Entities.TaxPeriod" Role="TaxPeriod" Multiplicity="1" />
+    <End Type="Entities.Tax" Role="Tax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaxPeriod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tax">
+        <PropertyRef Name="TaxPeriodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

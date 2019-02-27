@@ -1,0 +1,12 @@
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\bin\Debug\Sunday.Core.dll.config
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\bin\Debug\Sunday.Core.dll
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\bin\Debug\Sunday.Core.pdb
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\bin\Debug\EntityFramework.dll
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\bin\Debug\EntityFramework.xml
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\obj\Debug\Sunday.Core.csprojAssemblyReference.cache
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\obj\Debug\Sunday.Core.csproj.CoreCompileInputs.cache
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\obj\Debug\Sunday.Core.csproj.CopyComplete
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\obj\Debug\Sunday.Core.dll
+C:\Users\Darius\Source\Repos\Sunday.Api\Sunday.Core\obj\Debug\Sunday.Core.pdb
